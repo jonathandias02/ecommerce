@@ -2,13 +2,26 @@
 
 require_once("vendor/autoload.php");
 
+use Jonathan\Page;
+use Jonathan\PageAdmin;
+
 $app = new \Slim\Slim();
 
 $app->config('debug', true);
 
 $app->get('/', function() {
     
-	echo "OK";
+	$page = new Page();
+
+	$page->setTpl("index");
+
+});
+
+$app->get('/admin', function() {
+    
+	$page = new PageAdmin();
+
+	$page->setTpl("index");
 
 });
 
