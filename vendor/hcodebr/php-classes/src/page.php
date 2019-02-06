@@ -9,10 +9,13 @@ class Page {
 	private $tpl;
 	private $options = [];
 	private $default = [
+		"header" => true,
+		"footer" => true,
 		"data" => []
 	];
 
-	public function __construct($opts = array(), $tpl = "/views/"){
+	public function __construct($opts = array(), $tpl = "/views/")
+	{
 
 		$this->options = array_merge($this->default, $opts);
 
@@ -28,11 +31,15 @@ class Page {
 
 		$this->setData($this->options["data"]);
 
-		$this->tpl->draw("header");
+		if($this->options["header"])
+		{
+			$this->tpl->draw("header");
+		}
 
 	}
 
-	public function setData($data = array()){
+	public function setData($data = array())
+	{
 
 		foreach ($data as $key => $value) {
 			$this->Tpl->assign($key, $value);
@@ -40,15 +47,19 @@ class Page {
 
 	}
 
-	public function setTpl($name, $data = array(), $returnHTML = false){
+	public function setTpl($name, $data = array(), $returnHTML = false)
+	{
 
 		$this->setData($data);
 		return $this->tpl->draw($name, $returnHTML);
 	}
 
-	public function __destruct(){
-
-		$this->tpl->draw("footer");
+	public function __destruct()
+	{
+		if($this->options["footer"])
+		{
+			$this->tpl->draw("footer");
+		}		
 
 	}
 
