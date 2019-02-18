@@ -42,7 +42,7 @@ class Page {
 	{
 
 		foreach ($data as $key => $value) {
-			$this->Tpl->assign($key, $value);
+			$this->tpl->assign($key, $value);
 		}
 
 	}
